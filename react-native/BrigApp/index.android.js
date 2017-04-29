@@ -12,6 +12,7 @@ import MapScreen from './screens/MapScreen'
 import ChatRoomScreen from './screens/ChatRoomScreen'
 import ChatScreen from './screens/ChatScreen'
 
+
 const BrigApp = StackNavigator({ 
     MapScreen: {screen: MapScreen},
     ChatScreen: {screen: ChatScreen},
