@@ -1,0 +1,38 @@
+name: wildfire-backend
+version: '0.1.0.0'
+category: Web
+author: Author name here
+maintainer: example@example.com
+copyright: 2017 Author name here
+license: BSD3
+homepage: https://github.com/githubuser/wildfire-backend#readme
+extra-source-files:
+- README.md
+dependencies:
+  - base >=4.7 && <5
+  - servant-client
+  - servant
+  - servant-server
+  - warp
+  - wai
+  - text
+  - persistent-sqlite
+  - persistent
+  - persistent-template
+  - esqueleto
+  - mtl
+  - monad-logger
+  - resourcet
+  - aeson
+  - http-client
+  - http-client-tls
+  - HTTP
+  - cassava
+  - vector
+  - convertible
+  - bytestring
+  - time
+executables:
+  wildfire-backend:
+    main: Main.hs
+    source-dirs: src
