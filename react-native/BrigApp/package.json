@@ -9,6 +9,12 @@
 	"dependencies": {
 		"react": "16.0.0-alpha.6",
 		"react-native": "0.43.4",
+        "react-native-action-button": "^2.6.9",
+        "react-native-gifted-chat": "^0.1.4",
+        "react-native-maps": "file:../react-native-maps",
+        "react-native-material-design": "^0.3.7",
+        "react-native-vector-icons": "^4.0.1",
+        "react-navigation": "git+https://github.com/react-community/react-navigation.git"
 	},
 	"devDependencies": {
 		"babel-jest": "19.0.0",
