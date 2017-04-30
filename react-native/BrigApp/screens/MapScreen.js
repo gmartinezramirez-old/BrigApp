@@ -2,11 +2,18 @@
 import React, { Component } from 'react';
 import {
     AppRegistry,
-
     StyleSheet,
     View,
-    Text
+    Text,
+    ToolbarAndroid
 } from 'react-native';
+
+var nativeImageSource = require('nativeImageSource');
+
+import ActionButton from 'react-native-action-button';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
+
 
 import MapComponent from '../Components/MapComponents';
 
@@ -87,34 +94,96 @@ export default class MapScreen extends Component {
 
         areas = [pocoPeligro, muchoPeligro, incendio];
 
-        // las capas
-        coordHumo = coordHumo.map(toLatLng);
-        coordCenizas = coordCenizas.map(toLatLng);
-        
-        //humo    = {coordinates: coordHumo, color: "rgba(80,80,80, 0.5)", id: 12, holes:[], zIndex: 9999999};
-        //cenizas = {coordinates: coordCenizas, color: "rgba(200,200,200, 0.5)", id: 13, holes:[], zIndex: 9999995};
-        //humo = {name: "Humo", defaultVisible: true, polygons: [humo]};
-        //cenizas = {name: "Cenizas", defaultVisible: false, polygons: [cenizas]};
-
-        //layers = [humo, cenizas];
-
         this.state = {
             areas: areas,
-            layers: []
+            layers: [],
+            modoCommander: false,
+            modoAvistamiento: false,
+            titleToolbar: "",
         }
+    }
+
+
+    toModeCommander(){
+        this.setState({modoCommander: true});
+    }
+
+    toModeAvistamiento(){
+        console.log(">>  Modo Avistamiento");
+
+        this.setState({
+            modoAvistamiento: !this.state.modoAvistamiento,
+            //titleToolbar: "Seleccione"
+        });
+    }
+
+    // cancelo: false -> cancelado
+    exitModeAvistamiento(cancelado){
+        console.log("cancelado: " + cancelado);
+        this.setState({
+            modoAvistamiento: false,
+            titleToolbar: ""
+        });
+    }
+
+    getToolbar(title, onClickCancel, onClickOk){
+        return (
+            <ToolbarAndroid
+                title={title}
+                style={styles.toolbar}
+                onIconClicked={() => onClickCancel(false)}
+                navIcon={nativeImageSource({
+                    android: 'ic_close_black_24dp',
+                    width: 48,
+                    height: 48
+                })}
+                logo={nativeImageSource({
+                    android: 'ic_launcher',
+                    width: 132,
+                    height: 144
+                })}
+            />
+        )
     }
 
     render(){
         const { navigate } = this.props.navigation;
         //var thecoords = coords;
         var thecoords = [];
+
+        var toolbar = undefined;
+        if(this.state.modoAvistamiento){
+            toolbar = this.getToolbar(this.state.titleToolbar);
+        }
+
+        console.log("this.state.modoAvistamiento");
+        console.log(this.state.modoAvistamiento);
+
         return (
             <View style ={styles.container}>
-                <MapComponent
+            <MapComponent
                     routes={thecoords}
                     areas={this.state.areas}
                     layers={this.state.layers}
+                    toolbar={toolbar}
                 >
+                    <ActionButton
+                        icon={<Icon name="layers" style={styles.actionButtonIcon} />}
+                        buttonColor="rgba(231,76,60,1)"
+                        onPress={() => {this.toModeAvistamiento()}}
+                    />
+                    <ActionButton
+                        icon={<Icon name="directions" style={styles.actionButtonIcon} />}
+                        buttonColor="rgba(240,240,240,1)"
+                        onPress={() => {}}
+                        offsetY={90}
+                    />
+                    <ActionButton
+                        icon={<Icon name="directions" style={styles.actionButtonIcon} />}
+                        buttonColor="rgba(240,240,240,1)"
+                        onPress={() => {navigate('ChatRoomScreen')}}
+                        offsetY={150}
+                    />
                 </MapComponent>
             </View>
         )
@@ -122,18 +191,26 @@ export default class MapScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+    },
 
-  actionButtonIcon: {
-    fontSize: 20,
-    height: 22,
-    color: 'white',
-  },
+    actionButtonIcon: {
+        fontSize: 20,
+        height: 22,
+        color: '#666',
+    },
+    toolbar: {
+        backgroundColor: '#e9eaed',
+        height: 56,
+        zIndex: 1
+    },
+    map: {
+        height: 100,
+    }
 });
 
 AppRegistry.registerComponent('MapScreen', () => MapScreen);

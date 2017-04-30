@@ -7,6 +7,7 @@ import {
     View,
     TouchableOpacity,
     Modal,
+    ToolbarAndroid
 } from 'react-native';
 import {
     Button,
@@ -213,8 +214,6 @@ export default class MapComponent extends Component {
             find = values.find((v) => {
                 return v === index;
             });
-            console.log("FIND");
-            console.log(find);
             if(find === undefined){
                 this.state.layers[index].visible = false;
             }else{
@@ -275,8 +274,6 @@ export default class MapComponent extends Component {
         var routes = this.props.routes;
         var areas = this.props.areas;
         var layers = [];
-        console.log("this.state.layers");
-        console.log(this.state.layers);
         this.state.layers.forEach((layer) => {
             if(layer.visible){
                 layer.polygons.forEach((pol) => {
@@ -284,8 +281,6 @@ export default class MapComponent extends Component {
                 })
             } 
         })
-        console.log(">> Render. layers:");
-        console.log(layers);
 
         if (this.state.editing) {
             mapOptions.scrollEnabled = false;
@@ -324,6 +319,7 @@ export default class MapComponent extends Component {
 
         return (
             <View style ={styles.container}>
+                {this.props.toolbar}
                 <MapView
                     style={styles.map}
                     initialRegion={{
@@ -332,6 +328,7 @@ export default class MapComponent extends Component {
                             latitudeDelta: 0.015,
                             longitudeDelta: 0.0121,
                     }}
+                    mapType={"satellite"}
                     onPress={e => this.onPress(e, this.props.canCreatePolygon, this.props.canCreateLine)}
                     showsUserLocation={true}
                     showsMyLocationButton={true}
@@ -454,6 +451,7 @@ const styles = StyleSheet.create({
     },
     map:{
         ...StyleSheet.absoluteFillObject,
+        zIndex: 0,
     },
     buttonContainer: {
         flexDirection: 'row',
@@ -522,7 +520,7 @@ const styles = StyleSheet.create({
     fondoModal: {
         backgroundColor: 'rgba(50,50,50,0.5)', 
         ...StyleSheet.absoluteFillObject,
-    }
+    },
 });
 
 AppRegistry.registerComponent('MapComponent', () => MapComponent);
