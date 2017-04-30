@@ -15,6 +15,11 @@ import {
     Subheader
 } from 'react-native-material-design';
 
+import iconStar from '../assets/map_star.png';
+import iconTri from '../assets/map_tri.png';
+import iconStarSel from '../assets/map_star_sel.png';
+import iconTriSel from '../assets/map_tri_sel.png';
+
 import MapView from 'react-native-maps';
 var nativeImageSource = require('nativeImageSource');
 
@@ -410,14 +415,23 @@ export default class MapComponent extends Component {
                         />
                     ))}
                     
-                    {this.props.personas && this.props.personas.map(p => (
+                    {this.props.personas && this.props.personas.map(p => {
+                        var icono = undefined;
+                        if(p.jefe){
+                            icono = iconStar;
+                        }else{
+                            icono = iconTri;
+                        }
+                        return (
+
                         <MapView.Marker
                             key={p.key}
                             coordinate={p.pos}
+                            image={icono}
                           >
                         </MapView.Marker>
                       )
-                    )}
+                    })}
 
                 </MapView>
 
