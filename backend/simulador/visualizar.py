@@ -8,7 +8,7 @@ WIDTH = 640
 HEIGHT = 480
 
 var = 0
-ls = loads(open("salida.json").read())
+ls = loads(open("poligono200.json").read())
 
 
 
