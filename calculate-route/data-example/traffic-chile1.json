@@ -1,0 +1,26 @@
+[{
+   "id": "1",
+   "points": [[-73.42467784881592, -41.15299413781733]],
+   "value": 1,
+   "value_type": "fire",
+   "mode": "REPLACE"
+}, {
+   "id": "2",
+   "points": [[-73.42480659484863, -41.153002216148124]],
+   "value": 2,
+   "value_type": "fire",
+   "mode": "REPLACE"
+}, {
+   "id": "3",
+   "points": [[-73.42423796653748, -41.15395545219152]],
+   "value": 3,
+   "value_type": "fire",
+   "mode": "REPLACE"
+}, {
+   "id": "4",
+   "points": [[-73.42351913452148, -41.156079987735794]],
+   "value": 10,
+   "value_type": "fire",
+   "mode": "REPLACE"
+}
+]

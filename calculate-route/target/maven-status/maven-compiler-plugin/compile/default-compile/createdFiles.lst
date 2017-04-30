@@ -1,0 +1,15 @@
+com/graphhopper/traffic/demo/RoadEntry.class
+com/graphhopper/traffic/demo/ErrorFilter.class
+com/graphhopper/traffic/demo/CustomGuiceModule$1.class
+com/graphhopper/traffic/demo/CustomGuiceModule$PointSerializer.class
+com/graphhopper/traffic/demo/CustomGuiceModule.class
+com/graphhopper/traffic/demo/Point.class
+com/graphhopper/traffic/demo/DemoServer$1$1.class
+com/graphhopper/traffic/demo/DataFeedServlet.class
+com/graphhopper/traffic/demo/DataUpdater.class
+com/graphhopper/traffic/demo/DemoServer$1.class
+com/graphhopper/traffic/demo/CustomGuiceModule$PointDeserializer.class
+com/graphhopper/traffic/demo/DemoServer.class
+com/graphhopper/traffic/demo/DataUpdater$1.class
+com/graphhopper/traffic/demo/RoadsServlet.class
+com/graphhopper/traffic/demo/RoadData.class

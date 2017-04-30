@@ -1,0 +1,9 @@
+/home/gonzalo/projects/nasa/calculo-ruta/graphhopper-traffic-data-integration/src/main/java/com/graphhopper/traffic/demo/DemoServer.java
+/home/gonzalo/projects/nasa/calculo-ruta/graphhopper-traffic-data-integration/src/main/java/com/graphhopper/traffic/demo/RoadData.java
+/home/gonzalo/projects/nasa/calculo-ruta/graphhopper-traffic-data-integration/src/main/java/com/graphhopper/traffic/demo/Point.java
+/home/gonzalo/projects/nasa/calculo-ruta/graphhopper-traffic-data-integration/src/main/java/com/graphhopper/traffic/demo/CustomGuiceModule.java
+/home/gonzalo/projects/nasa/calculo-ruta/graphhopper-traffic-data-integration/src/main/java/com/graphhopper/traffic/demo/RoadEntry.java
+/home/gonzalo/projects/nasa/calculo-ruta/graphhopper-traffic-data-integration/src/main/java/com/graphhopper/traffic/demo/DataUpdater.java
+/home/gonzalo/projects/nasa/calculo-ruta/graphhopper-traffic-data-integration/src/main/java/com/graphhopper/traffic/demo/DataFeedServlet.java
+/home/gonzalo/projects/nasa/calculo-ruta/graphhopper-traffic-data-integration/src/main/java/com/graphhopper/traffic/demo/RoadsServlet.java
+/home/gonzalo/projects/nasa/calculo-ruta/graphhopper-traffic-data-integration/src/main/java/com/graphhopper/traffic/demo/ErrorFilter.java
