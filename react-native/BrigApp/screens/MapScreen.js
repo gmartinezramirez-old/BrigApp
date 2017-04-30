@@ -21,6 +21,16 @@ import MapComponent from '../Components/MapComponents';
 var coords = [ [ -70.660088, -33.416625 ], [ -70.656752, -33.416566 ], [ -70.656395, -33.417651 ], [ -70.651693, -33.417599 ], [ -70.650541, -33.420073 ], [ -70.65051, -33.419904 ] ];
 
 
+var personas = [
+    {tipo: "jefe",       pos: {longitude: -70.660000 , latitude: -33.416000 }, key: 1},
+    {tipo: "brigadista", pos: {longitude: -70.660188 , latitude: -33.416425 }, key: 2},
+    {tipo: "brigadista", pos: {longitude: -70.660288 , latitude: -33.416725 }, key: 3},
+    {tipo: "brigadista", pos: {longitude: -70.660488 , latitude: -33.416925 }, key: 4},
+    {tipo: "brigadista", pos: {longitude: -70.660688 , latitude: -33.416325 }, key: 5},
+    {tipo: "brigadista", pos: {longitude: -70.660888 , latitude: -33.416225 }, key: 6},
+]
+
+
 function toLatLng(c){
     return { latitude: c[1], longitude: c[0],
     }
@@ -100,6 +110,7 @@ export default class MapScreen extends Component {
             modoCommander: false,
             modoAvistamiento: false,
             titleToolbar: "",
+            personas: personas,
         }
     }
 
@@ -109,7 +120,6 @@ export default class MapScreen extends Component {
     }
 
     toModeAvistamiento(){
-        console.log(">>  Modo Avistamiento");
 
         this.setState({
             modoAvistamiento: !this.state.modoAvistamiento,
@@ -119,7 +129,6 @@ export default class MapScreen extends Component {
 
     // cancelo: false -> cancelado
     exitModeAvistamiento(cancelado){
-        console.log("cancelado: " + cancelado);
         this.setState({
             modoAvistamiento: false,
             titleToolbar: ""
@@ -156,8 +165,6 @@ export default class MapScreen extends Component {
             toolbar = this.getToolbar(this.state.titleToolbar);
         }
 
-        console.log("this.state.modoAvistamiento");
-        console.log(this.state.modoAvistamiento);
 
         return (
             <View style ={styles.container}>
@@ -166,6 +173,7 @@ export default class MapScreen extends Component {
                     areas={this.state.areas}
                     layers={this.state.layers}
                     toolbar={toolbar}
+                    personas={this.state.personas}
                 >
                     <ActionButton
                         icon={<Icon name="layers" style={styles.actionButtonIcon} />}
