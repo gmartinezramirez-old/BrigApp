@@ -32,6 +32,7 @@ dependencies:
   - convertible
   - bytestring
   - time
+  - http-api-data
 executables:
   wildfire-backend:
     main: Main.hs

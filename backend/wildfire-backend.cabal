@@ -1,4 +1,4 @@
--- This file has been generated from package.yaml by hpack version 0.15.0.
+-- This file has been generated from package.yaml by hpack version 0.17.0.
 --
 -- see: https://github.com/sol/hpack
 
@@ -45,7 +45,9 @@ executable wildfire-backend
     , convertible
     , bytestring
     , time
+    , http-api-data
   other-modules:
+      API.Elevation
       API.FireData
       API.OpenWeatherMap
       API.Server
