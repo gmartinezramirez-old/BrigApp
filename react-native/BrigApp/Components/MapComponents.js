@@ -51,8 +51,8 @@ export default class MapComponent extends Component {
         }
 
         this.state = {
-            lat: -35.648369,    // lugar incendio
-            lng: -71.850586,
+            lat: -35.650369,    // lugar incendio
+            lng: -71.847800,
             //lat: -33.416625,  // mi casa - pato ;D
             //lng: -70.660088,
             polygons: [],
@@ -61,6 +61,8 @@ export default class MapComponent extends Component {
             creatingHole: false,
             modalVisible: false,
             layers: layers, // guarda todas las capas
+            latitudeDelta: 0.1922,
+            longitudeDelta: 0.1421,
         }
     }
 
