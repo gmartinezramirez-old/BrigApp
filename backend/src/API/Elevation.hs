@@ -101,3 +101,5 @@ convert coords =
 storeElevation :: Either a Elevation -> IO ()
 storeElevation (Right (Elevation xs)) = runDB $ forM_ xs $ \(Result elevation (Location lat lng)) -> do
     insert $ Elevacion lat lng elevation
+
+

@@ -25,6 +25,8 @@ library:
   - scientific
   - convertible
   - bytestring
+  - text
+  - AC-Angle
   ghc-options:
       - -O2
       - -funbox-strict-fields
