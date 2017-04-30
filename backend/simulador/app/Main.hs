@@ -10,5 +10,6 @@ import Automata
 
 main :: IO ()
 main = do
-    let sim = runSimulation 0 (Information 0 0) 10000 (defaultCoordinates 50)
-    putStrLn $ "Steps: " ++ show (fst sim)
+    let x = snd $ runSimulation 0 (Information 2 2) 250 (defaultCoordinates 50)
+    {-writeJSON "salida.json" [x]-}
+    writePoligonoJSON "poligono.json" (poligono x)

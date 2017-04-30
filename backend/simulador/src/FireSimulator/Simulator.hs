@@ -11,6 +11,9 @@ import Data.List (foldl')
 import FireSimulator.Information
 import Debug.Trace
 import Data.List
+import qualified Data.ByteString.Lazy as BS
+import Data.Aeson
+import Data.Angle
 
 
 -- | TODO: Por ahora usamos la misma información en todas las celdas, una
@@ -113,7 +116,8 @@ runSimulation velocidad info iters coords =
         runSimulation' n !grid =
             let poke = runRule rule grid
                 (i, j, bigger) = findBigger poke
-            in runSimulation' (n - 1) . mapAutomata (fixAutomata bigger) $ poke
+            in runSimulation' (n - 1) . change n . mapAutomata (fixAutomata bigger) $ poke
+            {-in runSimulation' (n - 1) . mapAutomata (fixAutomata bigger) $ poke-}
 
         fixAutomata :: Double -> Cell -> Cell
         fixAutomata _ c@(Cell _ True _ _) = c
@@ -121,6 +125,10 @@ runSimulation velocidad info iters coords =
             where
                 state = s / d
                 isBurned = if state >= 1 then True else False
+
+        change :: Int -> Grid Cell -> Grid Cell
+        change 100 grid = V.map (\v -> V.map (\x -> x { information = Information (8) (-8)}) v) grid
+        change _ grid = grid
        
         findSpread :: Grid Cell -> Int
         findSpread grid = maximum [derecha, izquierda, arriba, abajo]
@@ -146,3 +154,59 @@ runSimulation velocidad info iters coords =
                 buscari :: [Int] -> Int
                 buscari = foldl' (\acc x -> if (state $ grid V.! x V.! center) == 1.0 then acc + 1 else acc) 0
 
+data Agregando = Agregando
+    { uno :: Maybe (Double, Double)
+    , dos :: Maybe (Double, Double)
+    } deriving Show
+
+poligono :: Grid Cell -> [(Double, Double)]
+poligono grid = 
+    let filtered = V.foldl' (\acc v -> (V.foldl' (\acc' x -> agregar acc' x ) (Agregando Nothing Nothing) v) : acc) [] grid
+        flat = concat . map fn $ filtered
+    in (head flat) : sortP (head flat) (tail flat)
+
+    where
+        agregar :: Agregando -> Cell -> Agregando
+        agregar a@(Agregando Nothing Nothing) c
+            | state c >= 1.0 = Agregando (Just (lat . position $ c, lng . position $ c)) Nothing
+            | otherwise = a
+        agregar a@(Agregando (Just x) _) c
+            | state c >= 1.0 = Agregando (Just x) (Just (lat . position $ c, lng . position $ c))
+            | otherwise = a
+        agregar x _ = error $ show x
+
+        sortP :: (Double, Double) -> [(Double, Double)] -> [(Double, Double)]
+        sortP x [] = [x]
+        sortP now all@(x:xs) =
+            let m = minimun' x xs
+            in m : sortP m (delete m all)
+           where 
+            minimun' ::  (Double, Double) -> [(Double, Double)] -> (Double, Double)
+            minimun' current [] = current
+            minimun' current (next:xs) = if haversineDouble current now < haversineDouble next now then minimun' current xs else minimun' next xs
+
+        fn :: Agregando -> [(Double, Double)]
+        fn (Agregando (Just t) (Just t2)) = [t, t2]
+        fn (Agregando (Just t) Nothing) = [t]
+        fn (Agregando Nothing Nothing) = []
+
+
+writePoligonoJSON :: FilePath -> [(Double, Double)] -> IO ()
+writePoligonoJSON file pol = do
+    let json = encode pol
+    BS.writeFile file json
+
+
+
+haversine :: (Degrees Double, Degrees Double) -> (Degrees Double, Degrees Double) -> Double
+haversine coor1 coor2 =  (\x -> x * 2 * 6367 * 1000) . asin . sqrt $ haversine' (tupleMap radians coor1) (tupleMap radians coor2)
+    where
+        tupleMap :: (a -> b) -> (a, a) -> (b, b)
+        tupleMap f (x, y) = (f x, f y)
+
+        haversine' :: (Radians Double, Radians Double) -> (Radians Double, Radians Double) -> Double
+        haversine' (Radians lat1, Radians lng1) (Radians lat2, Radians lng2) =
+            sin ((lat2 - lat1) / 2) ^ 2 + cos lat1 * cos lat2 * sin ((lng2 - lng1) / 2) ^ 2
+
+haversineDouble :: (Double, Double) -> (Double, Double) -> Double
+haversineDouble (x, y) (x', y') = haversine (Degrees x, Degrees y) (Degrees x', Degrees y')
