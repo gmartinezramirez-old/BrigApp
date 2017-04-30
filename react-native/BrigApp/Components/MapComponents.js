@@ -15,7 +15,13 @@ import {
     Subheader
 } from 'react-native-material-design';
 
+import iconStar from '../assets/map_star.png';
+import iconTri from '../assets/map_tri.png';
+import iconStarSel from '../assets/map_star_sel.png';
+import iconTriSel from '../assets/map_tri_sel.png';
+
 import MapView from 'react-native-maps';
+var nativeImageSource = require('nativeImageSource');
 
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -45,8 +51,10 @@ export default class MapComponent extends Component {
         }
 
         this.state = {
-            lat: -33.416625,
-            lng: -70.660088,
+            lat: -35.648369,    // lugar incendio
+            lng: -71.850586,
+            //lat: -33.416625,  // mi casa - pato ;D
+            //lng: -70.660088,
             polygons: [],
             lines: [],
             editing: null,
@@ -58,20 +66,20 @@ export default class MapComponent extends Component {
 
     componentDidMount() {
         // obtiene la posicion
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                var initialPosition = JSON.stringify(position); 
-                this.setState({initialPosition});
-            },
-            (error) => console.log("error: " + error),
-            {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-        ); 
-        this.watchID = navigator.geolocation.watchPosition((position) => {
-            this.setState({
-                lat: position.coords.latitude,
-                lng: position.coords.longitude,
-            });
-        });
+        //navigator.geolocation.getCurrentPosition(
+            //(position) => {
+                //var initialPosition = JSON.stringify(position); 
+                //this.setState({initialPosition});
+            //},
+            //(error) => console.log("error: " + error),
+            //{enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+        //); 
+        //this.watchID = navigator.geolocation.watchPosition((position) => {
+            //this.setState({
+                //lat: position.coords.latitude,
+                //lng: position.coords.longitude,
+            //});
+        //});
     }
 
     // cuando se termina de crear un poligono o linea
@@ -209,7 +217,6 @@ export default class MapComponent extends Component {
     // cambia las capas que se muestran
     // Se llama cada vez que hay un cambio en los checkbox
     changeLayers(values){
-        console.log("changeLayers");
         this.state.layers.forEach( (layer, index) => {
             find = values.find((v) => {
                 return v === index;
@@ -225,7 +232,6 @@ export default class MapComponent extends Component {
 
 
     crearModal() {
-        console.log("\n Creando modal\n");
         var items = [];
         var checked = [];
         for(var i = 0; i < this.state.layers.length; i++){
@@ -317,6 +323,8 @@ export default class MapComponent extends Component {
             )
         }
 
+
+
         return (
             <View style ={styles.container}>
                 {this.props.toolbar}
@@ -407,6 +415,23 @@ export default class MapComponent extends Component {
                         />
                     ))}
                     
+                    {this.props.personas && this.props.personas.map(p => {
+                        var icono = undefined;
+                        if(p.jefe){
+                            icono = iconStar;
+                        }else{
+                            icono = iconTri;
+                        }
+                        return (
+
+                        <MapView.Marker
+                            key={p.key}
+                            coordinate={p.pos}
+                            image={icono}
+                          >
+                        </MapView.Marker>
+                      )
+                    })}
 
                 </MapView>
 
