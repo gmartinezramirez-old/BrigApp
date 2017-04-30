@@ -242,25 +242,23 @@ export default class MapScreen extends Component {
                           anchorEnabled={false}
                           ref={ref => { this.bottomSheet = ref }}>
                           <View style={styles.bottomSheet}>
-                            <View style={styles.bottomSheetHeader}>
-                              <Text style={styles.label}>Moverse</Text>
+                            <View style={styles.bottomSheetContent}>
+                                <View style={styles.boton}>
+                                    <Icon name="person-add" size={30} ></Icon>
+                                    <Text>
+                                      Refuerzos
+                                    </Text>
+                                </View>
+                                <View style={styles.boton}>
+                                  <Icon name="whatshot" size={30} >
+                                  </Icon>
+                                  <Text>
+                                    Activo
+                                  </Text>
+                                </View>
                             </View>
                             <View style={styles.bottomSheetContent} >
-                                <View key={1} style={styles.botonesEventos}>
-                                    <Button
-                                        title={"No"}
-                                        onPress={() => {}}
-                                    />
-                                    <Icon name="clear" size={30} color="#b00" />
-                                </View>
 
-                                <View key={2} style={styles.botonesEventos}>
-                                    <Button
-                                        title={"Ok"}
-                                        onPress={() => {}}
-                                    />
-                                    <Icon name="check" size={30} color="#0b0" />
-                                </View>
                             </View>
                           </View>
                         </BottomSheetBehavior>
@@ -328,6 +326,13 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginRight: 20,
         flexDirection: 'row',
+    },
+
+    boton: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginLeft: 5,
+      marginRight: 5
     }
 });
 
