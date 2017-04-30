@@ -13,10 +13,13 @@ import Servant
 import Data.Proxy
 import Data.Text (Text)
 import Control.Monad.IO.Class (liftIO)
+import Database.Types
 
 
 
-type ServerAPI = "test" :> Get '[JSON] Text
+type ServerAPI =
+         "test" :> Get '[JSON] Text
+    :<|> "incendio" :> "area" :> Get '[JSON] IncendioArea
 
 
 
@@ -24,9 +27,14 @@ serverAPI :: Proxy ServerAPI
 serverAPI = Proxy
 
 server :: Server ServerAPI
-server = do
-    liftIO $ putStrLn "Hola mundo"
-    return "Hola mundo"
+server =
+    test :<|>
+    incendio'
+
+
+incendio' = undefined
+
+test = return "Hola mundo"
 
 app :: Application
 app = serve serverAPI server

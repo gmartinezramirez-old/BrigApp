@@ -55,6 +55,17 @@ share [mkPersist sqlSettings, mkMigrate "migrateAll"] [persistLowerCase|
         lng Double
         deriving Show
 
+    Simulacion json
+        incendio IncendioId
+        lat Double
+        lng Double
+        estado Double
+
+    Elevacion
+        lat Double
+        lng Double
+        val Double
+
 |]
 
 type Query a = ReaderT SqlBackend (NoLoggingT (ResourceT IO)) a
