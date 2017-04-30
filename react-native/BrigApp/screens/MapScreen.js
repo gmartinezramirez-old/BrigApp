@@ -34,14 +34,18 @@ import MapComponent from '../Components/MapComponents';
 
 var coords = [ [ -70.660088, -33.416625 ], [ -70.656752, -33.416566 ], [ -70.656395, -33.417651 ], [ -70.651693, -33.417599 ], [ -70.650541, -33.420073 ], [ -70.65051, -33.419904 ] ];
 
+import iconStar from '../assets/map_star.png';
+import iconTri from '../assets/map_tri.png';
+import iconStarSel from '../assets/map_star_sel.png';
+import iconTriSel from '../assets/map_tri_sel.png';
 
 var personas = [
-    {jefe: true,       pos: {longitude: -71.84916960332662 , latitude: -35.649353146812534 }, key: 1},
-    {jefe: false, pos: {longitude: -71.84967060332662 , latitude: -35.649157546812534 }, key: 2},
-    {jefe: false, pos: {longitude: -71.84936960332662 , latitude: -35.649853146812534 }, key: 3},
-    {jefe: false, pos: {longitude: -71.84996560332662 , latitude: -35.649957946812534 }, key: 4},
-    {jefe: false, pos: {longitude: -71.84985260332662 , latitude: -35.649553146812534 }, key: 5},
-    {jefe: false, pos: {longitude: -71.84956160332662 , latitude: -35.649251146812534 }, key: 6},
+    {jefe: true,       pos: {longitude: -71.84948556125164 , latitude: -35.64848222338541 }, key: 1, ico: iconStar},
+    {jefe: false, pos: {longitude: -71.84943795204163 , latitude: -35.648601827979654 }, key: 2, ico: iconTri},
+
+    {jefe: true, pos: {longitude: -71.85029592365026 , latitude:  -35.64890860340953 }, key: 4, ico: iconStarSel},
+    {jefe: false, pos: {longitude: -71.85049004852772 , latitude:  -35.64870726513859 }, key: 5, ico: iconTriSel},
+    {jefe: false, pos: {longitude: -71.84995997697115 , latitude:  -35.649095773985714 }, key: 6, ico: iconTriSel},
 ]
 
 
@@ -220,7 +224,6 @@ export default class MapScreen extends Component {
 
 
         return (
-            <CoordinatorLayout style={styles.container}>
 
                 <View style={styles.container2}>
                     <MapComponent
@@ -230,38 +233,8 @@ export default class MapScreen extends Component {
                             toolbar={toolbar}
                             personas={this.state.personas}
                         >
-                        <BottomSheetBehavior
-                          peekHeight={70}
-                          hideable={false}
-                          anchorEnabled={false}
-                          ref={ref => { this.bottomSheet = ref }}>
-                          <View style={styles.bottomSheet}>
-                            <View style={styles.bottomSheetHeader}>
-                              <Text style={styles.label}>Moverse</Text>
-                            </View>
-                            <View style={styles.bottomSheetContent} >
-                                <View key={1} style={styles.botonesEventos}>
-                                    <Button
-                                        title={"No"}
-                                        onPress={() => {}}
-                                    >
-                                    </Button>
-                                    <Icon name="clear" size={50} color="#b00" />
-                                </View>
-
-                                <View key={2} style={styles.botonesEventos}>
-                                    <Button
-                                        title={"Ok"}
-                                        onPress={() => {}}
-                                    />
-                                    <Icon name="check" size={50} color="#0b0" />
-                                </View>
-                            </View>
-                          </View>
-                        </BottomSheetBehavior>
                     </MapComponent>
                 </View>
-            </CoordinatorLayout>
         )
     }
 }

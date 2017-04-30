@@ -7,7 +7,8 @@ import {
     View,
     TouchableOpacity,
     Modal,
-    ToolbarAndroid
+    ToolbarAndroid,
+    Dimensions,
 } from 'react-native';
 import {
     Button,
@@ -27,7 +28,13 @@ import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 let id = 0;
+
 const STROKE_WIDTH = 3;
+const { width, height } = Dimensions.get('window');
+
+const ASPECT_RATIO = width / height;
+const LATITUDE_DELTA = 0.01;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 // Layer:
 //  {
@@ -61,8 +68,8 @@ export default class MapComponent extends Component {
             creatingHole: false,
             modalVisible: false,
             layers: layers, // guarda todas las capas
-            latitudeDelta: 0.1922,
-            longitudeDelta: 0.1421,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA
         }
     }
 
@@ -171,6 +178,8 @@ export default class MapComponent extends Component {
     }
 
     onPress(e, canCreatePolygon, canCreateLine) {
+        console.log("Pos");
+        console.log(e.nativeEvent.coordinate);
         if(canCreatePolygon){
             this.creatingPolygon(e);
         }
@@ -418,18 +427,12 @@ export default class MapComponent extends Component {
                     ))}
                     
                     {this.props.personas && this.props.personas.map(p => {
-                        var icono = undefined;
-                        if(p.jefe){
-                            icono = iconStar;
-                        }else{
-                            icono = iconTri;
-                        }
                         return (
 
                         <MapView.Marker
                             key={p.key}
                             coordinate={p.pos}
-                            image={icono}
+                            image={p.ico}
                           >
                         </MapView.Marker>
                       )
