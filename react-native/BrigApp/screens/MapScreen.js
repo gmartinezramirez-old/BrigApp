@@ -17,6 +17,7 @@ import {
     BottomSheetBehavior,
 } from 'react-native-bottom-sheet-behavior'
 
+
 const { STATE_COLLAPSED, STATE_EXPANDED } = BottomSheetBehavior
 
 const { width, height } = Dimensions.get('window')
@@ -217,15 +218,9 @@ export default class MapScreen extends Component {
             toolbar = this.getToolbar(this.state.titleToolbar);
         }
 
-        var bottomCard = undefined;
-        //var bottomCard = (
-            //<View style={styles.bottomCard}>
-            //</View>
-        //)
 
         return (
             <CoordinatorLayout style={styles.container}>
-                <StatusBar translucent backgroundColor={'rgba(0, 0, 0, 0.25)'} />
 
                 <View style={styles.container2}>
                     <MapComponent
@@ -235,7 +230,6 @@ export default class MapScreen extends Component {
                             toolbar={toolbar}
                             personas={this.state.personas}
                         >
-                        {bottomCard}
                         <BottomSheetBehavior
                           peekHeight={70}
                           hideable={false}
@@ -250,8 +244,9 @@ export default class MapScreen extends Component {
                                     <Button
                                         title={"No"}
                                         onPress={() => {}}
-                                    />
-                                    <Icon name="clear" size={30} color="#b00" />
+                                    >
+                                    </Button>
+                                    <Icon name="clear" size={50} color="#b00" />
                                 </View>
 
                                 <View key={2} style={styles.botonesEventos}>
@@ -259,7 +254,7 @@ export default class MapScreen extends Component {
                                         title={"Ok"}
                                         onPress={() => {}}
                                     />
-                                    <Icon name="check" size={30} color="#0b0" />
+                                    <Icon name="check" size={50} color="#0b0" />
                                 </View>
                             </View>
                           </View>
@@ -318,6 +313,13 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         backgroundColor: 'transparent'
     },
+    bottomSheetHeaderTablet: {
+        padding: 24,
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: 'transparent',
+        justifyContent: 'center',
+    },
     bottomSheetContent: {
         alignItems: 'center',
         backgroundColor: 'white',
@@ -325,8 +327,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     botonesEventos: {
+        alignItems: 'center',
+        marginTop: 20,
         marginLeft: 20,
         marginRight: 20,
+        marginBottom: 20,
         flexDirection: 'row',
     }
 });
