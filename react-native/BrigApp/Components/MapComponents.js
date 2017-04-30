@@ -18,7 +18,7 @@ import {
 import iconStar from '../assets/map_star.png';
 import iconTri from '../assets/map_tri.png';
 import iconStarSel from '../assets/map_star_sel.png';
-import iconTriSel from '../assets/map_tri_sel.png';
+import iconExtinto from '../assets/extinto.png';
 
 import MapView from 'react-native-maps';
 var nativeImageSource = require('nativeImageSource');

@@ -9,6 +9,7 @@ import {
     StatusBar,
     Dimensions,
     Button,
+    Image
 } from 'react-native';
 
 import {
@@ -250,10 +251,31 @@ export default class MapScreen extends Component {
                                     </Text>
                                 </View>
                                 <View style={styles.boton}>
-                                  <Icon name="whatshot" size={30} >
-                                  </Icon>
+                                  <Image source={require("../assets/activo.png")}>
+                                  </Image>
                                   <Text>
                                     Activo
+                                  </Text>
+                                </View>
+                                <View style={styles.boton}>
+                                  <Image source={require("../assets/combate.png")}>
+                                  </Image>
+                                  <Text>
+                                    En Combate
+                                  </Text>
+                                </View>
+                                <View style={styles.boton}>
+                                  <Image source={require("../assets/controlado.png")}>
+                                  </Image>
+                                  <Text>
+                                    Controlado
+                                  </Text>
+                                </View>
+                                <View style={styles.boton}>
+                                  <Image source={require("../assets/extinto.png")}>
+                                  </Image>
+                                  <Text>
+                                    Extinto
                                   </Text>
                                 </View>
                             </View>
