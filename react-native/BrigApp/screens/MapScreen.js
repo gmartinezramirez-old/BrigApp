@@ -245,38 +245,22 @@ export default class MapScreen extends Component {
                           <View style={styles.bottomSheet}>
                             <View style={styles.bottomSheetContent}>
                                 <View style={styles.boton}>
-                                    <Icon name="person-add" size={30} ></Icon>
-                                    <Text>
-                                      Refuerzos
+                                    <Icon name="person-add" style={styles.icono} size={20} ></Icon>
+                                    <Text style={styles.texto}>
+                                      15:35 - Refuerzos solicitados por Brigada 1
                                     </Text>
                                 </View>
                                 <View style={styles.boton}>
-                                  <Image source={require("../assets/activo.png")}>
-                                  </Image>
-                                  <Text>
-                                    Activo
-                                  </Text>
+                                    <Image source={require('../assets/combate.png')} style={styles.icon} />
+                                    <Text style={styles.texto}>
+                                      15:31 - Brigada 3 inicia combate de incendio.
+                                    </Text>
                                 </View>
                                 <View style={styles.boton}>
-                                  <Image source={require("../assets/combate.png")}>
-                                  </Image>
-                                  <Text>
-                                    En Combate
-                                  </Text>
-                                </View>
-                                <View style={styles.boton}>
-                                  <Image source={require("../assets/controlado.png")}>
-                                  </Image>
-                                  <Text>
-                                    Controlado
-                                  </Text>
-                                </View>
-                                <View style={styles.boton}>
-                                  <Image source={require("../assets/extinto.png")}>
-                                  </Image>
-                                  <Text>
-                                    Extinto
-                                  </Text>
+                                    <Image source={require('../assets/combate.png')} style={styles.icon} />
+                                    <Text style={styles.texto}>
+                                      15:30 - Brigada 2 inicia combate de incendio.
+                                    </Text>
                                 </View>
                             </View>
                             <View style={styles.bottomSheetContent} >
@@ -339,10 +323,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent'
     },
     bottomSheetContent: {
-        alignItems: 'center',
         backgroundColor: 'white',
-        flexDirection: 'row',
-        justifyContent: 'center',
     },
     botonesEventos: {
         marginLeft: 20,
@@ -351,10 +332,15 @@ const styles = StyleSheet.create({
     },
 
     boton: {
+      flexDirection: 'row',
       justifyContent: 'center',
-      alignItems: 'center',
-      marginLeft: 5,
-      marginRight: 5
+      alignItems: 'flex-start',
+    },
+    texto: {
+      marginLeft: 10
+    },
+    icono:{
+      marginLeft: 5
     }
 });
 
